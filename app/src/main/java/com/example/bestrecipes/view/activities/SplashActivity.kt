@@ -1,4 +1,4 @@
-package com.example.bestrecipes
+package com.example.bestrecipes.view.activities
 
 import android.content.Intent
 import android.os.Build
@@ -10,6 +10,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import com.example.bestrecipes.R
 import com.example.bestrecipes.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.bestrecipes.ui.dashboard
+package com.example.bestrecipes.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
