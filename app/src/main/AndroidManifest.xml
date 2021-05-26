@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BestRecipes">
-        <activity android:name=".view.activities.AddUpdateDishActivity"
-            android:theme="@style/Theme.BestRecipes.NoActionBar"
-            android:label="Add Dish"></activity>
+        <activity
+            android:name=".view.activities.AddUpdateDishActivity"
+            android:configChanges="orientation"
+            android:label="Add Dish"
+            android:theme="@style/Theme.BestRecipes.NoActionBar"></activity>
         <activity
             android:name=".view.activities.SplashActivity"
             android:theme="@style/Theme.BestRecipes.NoActionBar">
