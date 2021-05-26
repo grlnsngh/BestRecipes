@@ -1,6 +1,10 @@
 package com.example.bestrecipes.view.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -32,5 +36,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+//        val addButton = findViewById<Button>(R.id.action_add_dish)
+//        addButton.setOnClickListener {
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                startActivity(Intent(this, AddUpdateDishActivity::class.java))
+//            }, 0)
+//        }
     }
 }

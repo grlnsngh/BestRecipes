@@ -1,5 +1,6 @@
 package com.example.bestrecipes.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bestrecipes.R
 import com.example.bestrecipes.databinding.FragmentAllDishesBinding
+import com.example.bestrecipes.view.activities.AddUpdateDishActivity
 import com.example.bestrecipes.viewmodel.HomeViewModel
 
 class AddDishesFragment : Fragment() {
@@ -47,7 +49,16 @@ class AddDishesFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add_dish -> {
+                startActivity(Intent(requireActivity(), AddUpdateDishActivity::class.java))
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
