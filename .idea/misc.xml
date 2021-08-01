@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/grlns/AndroidStudioProjects/BestRecipes/app/src/main/res/drawable/ic_gallery_24.xml" value="0.1375" />
+        <entry key="..\:/Users/grlns/AndroidStudioProjects/BestRecipes/app/src/main/res/drawable/ic_photo_camera_24.xml" value="0.1375" />
         <entry key="..\:/Users/grlns/AndroidStudioProjects/BestRecipes/app/src/main/res/layout/activity_add_update_dish.xml" value="0.17759562841530055" />
-        <entry key="..\:/Users/grlns/AndroidStudioProjects/BestRecipes/app/src/main/res/layout/dialog_custom_image_selection.xml" value="0.23157894736842105" />
+        <entry key="..\:/Users/grlns/AndroidStudioProjects/BestRecipes/app/src/main/res/layout/dialog_custom_image_selection.xml" value="0.18" />
       </map>
     </option>
   </component>

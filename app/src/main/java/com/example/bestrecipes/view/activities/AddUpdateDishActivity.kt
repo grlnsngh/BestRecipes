@@ -40,11 +40,19 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun customImageSelectionDialog(){
+    private fun customImageSelectionDialog() {
         val dialog = Dialog(this)
         val binding: DialogCustomImageSelectionBinding =
             DialogCustomImageSelectionBinding.inflate(layoutInflater)
         dialog.setContentView(binding.root)
+        binding.tvCamera.setOnClickListener {
+            Toast.makeText(this, "Camera Clicked", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        binding.tvGallery.setOnClickListener {
+            Toast.makeText(this, "Gallery Clicked", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
         dialog.show()
     }
 }
