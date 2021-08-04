@@ -1,26 +1,25 @@
 package com.example.bestrecipes.view.activities
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.bestrecipes.R
 import com.example.bestrecipes.databinding.ActivityAddUpdateDishBinding
 import com.example.bestrecipes.databinding.DialogCustomImageSelectionBinding
 import com.karumi.dexter.Dexter
-import android.Manifest
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import android.provider.MediaStore
-import android.provider.Settings
-import android.util.Log
-import androidx.core.content.ContextCompat
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -110,10 +109,16 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ).withListener(object : PermissionListener {
                 override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                    Toast.makeText(
-                        this@AddUpdateDishActivity, "You have gallery permission now",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        this@AddUpdateDishActivity, "You have gallery permission now",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+
+                    val galleryIntent = Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                    startActivityForResult(galleryIntent, GALLERY)
                 }
 
                 override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
@@ -153,6 +158,17 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                     )
                 }
             }
+            if (requestCode == GALLERY) {
+                data?.let {
+                    val selectedPhotoUri = data.data
+                    mBinding.ivDishImage.setImageURI(selectedPhotoUri)
+                    mBinding.ivAddDishImage.setImageDrawable(
+                        ContextCompat.getDrawable(this, R.drawable.ic_vector_edit_24)
+                    )
+                }
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Log.e("<><><>", "user cancelled image selection")
         }
     }
 
@@ -182,5 +198,6 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         private const val CAMERA = 1
+        private const val GALLERY = 2
     }
 }
