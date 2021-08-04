@@ -10,13 +10,17 @@ import com.example.bestrecipes.databinding.ActivityAddUpdateDishBinding
 import com.example.bestrecipes.databinding.DialogCustomImageSelectionBinding
 import com.karumi.dexter.Dexter
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
+import androidx.core.content.ContextCompat
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -77,8 +81,8 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-//                            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                            startActivityForResult(intent, CAMERA)
+                            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                            startActivityForResult(intent, CAMERA)
                         }
                     }
 
@@ -131,6 +135,25 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //check if camera opened and closed as expected
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA) {
+                //assign captured image to imageview
+                //check if data(image) and extras are not empty
+                // adding !! because we know it will not be empty
+                data?.extras?.let {
+                    val thumbnail: Bitmap = data.extras!!.get("data") as Bitmap
+                    mBinding.ivDishImage.setImageBitmap(thumbnail)
+                    mBinding.ivAddDishImage.setImageDrawable(
+                        ContextCompat.getDrawable(this, R.drawable.ic_vector_edit_24)
+                    )
+                }
+            }
+        }
     }
 
     private fun showRationalDialogForPermissions() {
