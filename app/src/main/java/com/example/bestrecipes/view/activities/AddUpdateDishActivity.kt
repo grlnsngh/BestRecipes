@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.bestrecipes.R
 import com.example.bestrecipes.databinding.ActivityAddUpdateDishBinding
 import com.example.bestrecipes.databinding.DialogCustomImageSelectionBinding
@@ -152,7 +153,13 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                 // adding !! because we know it will not be empty
                 data?.extras?.let {
                     val thumbnail: Bitmap = data.extras!!.get("data") as Bitmap
-                    mBinding.ivDishImage.setImageBitmap(thumbnail)
+//                    mBinding.ivDishImage.setImageBitmap(thumbnail)
+
+                    Glide.with(this)
+                        .load(thumbnail)
+                        .centerCrop()
+                        .into(mBinding.ivDishImage)
+
                     mBinding.ivAddDishImage.setImageDrawable(
                         ContextCompat.getDrawable(this, R.drawable.ic_vector_edit_24)
                     )
@@ -161,7 +168,13 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
             if (requestCode == GALLERY) {
                 data?.let {
                     val selectedPhotoUri = data.data
-                    mBinding.ivDishImage.setImageURI(selectedPhotoUri)
+//                    mBinding.ivDishImage.setImageURI(selectedPhotoUri)
+
+                    Glide.with(this)
+                        .load(selectedPhotoUri)
+                        .centerCrop()
+                        .into(mBinding.ivDishImage)
+
                     mBinding.ivAddDishImage.setImageDrawable(
                         ContextCompat.getDrawable(this, R.drawable.ic_vector_edit_24)
                     )
